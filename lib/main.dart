@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  return runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -9,136 +9,99 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Playground",
-      home: Grade(),
+    // TODO: implement build
+    return MaterialApp(
+      title: 'dayTwo',
+      home: MyPage(),
     );
   }
 }
-
-class Grade extends StatelessWidget {
-  const Grade({super.key});
+class MyPage extends StatelessWidget {
+  const MyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
-      backgroundColor: Colors.amber[800],
-
       appBar: AppBar(
-        title: const Text("Playground",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold
-          ),
-        ),
-        backgroundColor: Colors.amber[700],
+        title: const Text("Day2"),
         centerTitle: true,
+        elevation: 0.0,
+        // Drawer 를 추가했기 때문에 leading 은 제거 해도 된다.
+        // leading: IconButton(
+        //   icon: const Icon(Icons.menu),
+        //   onPressed: () {print("menu clicked!");},
+        // ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {print('shopping cart clicked!');},
+          ),
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {print('search clicked!');},
+          ),
+        ],
       ),
-
-      body: const Padding(
-        padding: EdgeInsets.fromLTRB(30.0, 40.0, 0, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget> [
-            Center(
-              child: CircleAvatar(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              currentAccountPicture: const CircleAvatar(
                 backgroundImage: AssetImage('assets/dayOne.png'),
-                radius: 60.0,
+                backgroundColor: Colors.white,
+              ),
+              otherAccountsPictures: const [
+                CircleAvatar(
+                  backgroundImage: AssetImage('assets/dayOne.png'),
+                  backgroundColor: Colors.white,
+                ),
+                CircleAvatar(
+                  backgroundImage: AssetImage('assets/dayOne.png'),
+                  backgroundColor: Colors.white,
+                ),
+              ],
+              accountEmail: const Text('example@gmail.com'),
+              accountName: const Text('example'),
+              onDetailsPressed: () {print('arrow clicked!');},
+              decoration: const BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(40.0),
+                  bottomRight: Radius.circular(40.0),
+                ),
               ),
             ),
-            Divider(
-              height: 60.0,
-              color: Colors.white,
-              thickness: 0.5,
-              endIndent: 30.0,
-            ),
-            Text("Name",
-            style: TextStyle(
-              color: Colors.white,
-              letterSpacing: 2.0,
-            ),),
-            SizedBox(
-              height: 10.0,
-            ),
-            Text("Playground",
-            style: TextStyle(
-              color: Colors.white,
-              letterSpacing: 2.0,
-              fontSize: 28.0,
-              fontWeight: FontWeight.bold
-            ),),
-            SizedBox(
-              height: 30.0,
-            ),
-            Text("level",
-              style: TextStyle(
-                color: Colors.white,
-                letterSpacing: 2.0
-            ),),
-            SizedBox(
-              height: 10.0,
-            ),
-            Text("20",
-              style: TextStyle(
-                  color: Colors.white,
-                  letterSpacing: 2.0,
-                  fontSize: 28.0,
-                  fontWeight: FontWeight.bold
-            ),),
-            SizedBox(
-              height: 30.0,
-            ),
-            Row(
-              children: <Widget> [
-                Icon(Icons.check_circle_outline),
-                SizedBox(width: 10.0),
-                Text('one',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  letterSpacing: 1.0
-                ),),
-              ],
-            ),
-            Row(
-              children: <Widget> [
-                Icon(Icons.check_circle_outline),
-                SizedBox(width: 10.0),
-                Text('two',
-                  style: TextStyle(
-                      fontSize: 16.0,
-                      letterSpacing: 1.0
-                  ),),
-              ],
-            ),
-            Row(
-              children: <Widget> [
-                Icon(Icons.check_circle_outline),
-                SizedBox(width: 10.0),
-                Text('three',
-                  style: TextStyle(
-                      fontSize: 16.0,
-                      letterSpacing: 1.0
-                  ),),
-              ],
-            ),
-            Center(
-              child: CircleAvatar(
-                backgroundImage: AssetImage("assets/dayOne.png"),
-                radius: 40.0,
-                backgroundColor: Colors.blue,
+            ListTile(
+              leading: const Icon(
+                Icons.home,
+                color: Colors.grey,
               ),
-            )
-
+              title: const Text('Home'),
+              onTap: () {print('home clicked!');},
+              trailing: const Icon(Icons.add),
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.settings,
+                color: Colors.grey,
+              ),
+              title: const Text('Setting'),
+              onTap: () {print('Setting clicked!');},
+              trailing: const Icon(Icons.add),
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.question_answer,
+                color: Colors.grey,
+              ),
+              title: const Text('Q&A'),
+              onTap: () {print('Q&A clicked!');},
+              trailing: const Icon(Icons.add),
+            ),
           ],
-
-        )
-
+        ),
       ),
     );
   }
-
 }
